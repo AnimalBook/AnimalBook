@@ -1,6 +1,6 @@
 package modal.dto;
 
-public class users {
+public class Users {
 	private int user_id;
 	private String username, password, first_name, last_name, dob, type, status;
 	private char gender;
