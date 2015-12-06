@@ -7,7 +7,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class WelcomeController {
 	
-	@RequestMapping("/")
+	@RequestMapping("/weclome")
 	public ModelAndView welcomePage(){
 		ModelAndView model = new ModelAndView("welcomePage");
 		model.addObject("message", "welcomePage");
