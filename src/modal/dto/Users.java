@@ -1,8 +1,23 @@
 package modal.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity // tell hibernate that the class is entity
+@Table(name="tbluser") //this can omit if class name is the same table name
 public class Users {
+	
+	//Specify primary key
+	@Id
 	private int user_id;
+	
 	private String username, password, first_name, last_name, dob, type, status;
+	
+	@Column(name="gender", nullable=false) //this can omit if field name is the same column name
 	private char gender;
 
 	public int getUser_id() {
