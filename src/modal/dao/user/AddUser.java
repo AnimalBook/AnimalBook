@@ -44,6 +44,7 @@ public class AddUser {
 		
 		// session.save() means inserting record to database table, we just need to past the model object
 		session.save(user);
+		// session.delete(user); //Remove record from table 
 		
 		// commit transaction
 		session.getTransaction().commit();
