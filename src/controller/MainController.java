@@ -13,4 +13,12 @@ public class MainController {
 				ModelAndView model = new ModelAndView("document");
 				return model;
 		}
+		
+		@RequestMapping(value={"/"})
+		public ModelAndView indexView(){
+			ModelAndView model = new ModelAndView("index");
+			return model;
+		}
+		
+		
 }
