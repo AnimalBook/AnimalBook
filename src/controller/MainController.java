@@ -8,15 +8,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class MainController {
 
-		@RequestMapping("/welcome")
+		@RequestMapping("api/document")
 		public ModelAndView document(){
-				ModelAndView model = new ModelAndView("document");
+				ModelAndView model = new ModelAndView("index");
 				return model;
 		}
 		
-		@RequestMapping(value={"/"})
+		@RequestMapping("/")
 		public ModelAndView indexView(){
-			ModelAndView model = new ModelAndView("index");
+			ModelAndView model = new ModelAndView("coming-soon");
 			return model;
 		}
 		

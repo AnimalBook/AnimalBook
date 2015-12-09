@@ -18,7 +18,7 @@ public class UserAPI {
 	
 		@RequestMapping("/add")
 		public ResponseEntity<Map<String,Object>> addUser(@RequestBody Users user){
-			System.out.println("nul");
+		
 			System.out.println(user.getGender());
 			Map<String, Object> map  = new HashMap<String, Object>();
 			try {

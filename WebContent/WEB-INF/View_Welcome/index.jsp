@@ -10,9 +10,9 @@
         <meta name="author" content="">
         <title>Home</title>
         <!-- Bootstrap core CSS -->
-        <link href="resources/bootstrap/css/bootstrap.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet">
         <!-- Custom styles for this template -->
-        <link href="resources/assets/css/index.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/resources/assets/css/index.css" rel="stylesheet">
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -83,27 +83,78 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <textarea class="form-control" rows="5"></textarea>                     
+                    <textarea class="form-control" rows="13" id="addapi-user"></textarea>                     
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-default">Label</button>                                          
+                    <button type="button" class="btn btn-default" onclick="useradd_api()">Submit</button>                                          
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <textarea class="form-control" rows="6"></textarea>                                          
+                    <textarea class="form-control" rows="13" id="Displayapi-user"></textarea>                                          
+                    
                 </div>
             </div>
+            <footer style="Height : 30px;">
+			       
+   			 </footer>
         </div>
         <!-- /.container -->
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
-        <script src="resources/assets/js/jquery-1.11.3.min.js"></script>
-        <script src="resources/bootstrap/js/bootstrap.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/assets/js/jquery-1.11.3.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="resources/assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/assets/js/ie10-viewport-bug-workaround.js"></script>
+        
+        
+        <!--api script ajax-->
+        <script type="text/javascript">
+	$(document).ready(function(){		
+		
+				var defultJsonLoad={
+						"user_id":"102",
+						"username":"test",
+						"password":"123",
+						"first_name":"sok",
+						"last_name":"lundy",
+						"gender":"M",
+						"dob":"2012-09-09",
+						"type":"test",
+						"status":"live"
+				};
+				//format var defultJsonLoad to json format for add to textarea that have id addapi-user
+				//do like this because if add this variable to textarea it just indicate only object 
+				$("#addapi-user").text(JSON.stringify(defultJsonLoad, null, 4));
+				//$("#Displayapi-user").text(JSON.stringify(i,null, 4));
+				
+				
+	});
+	function useradd_api(){
+		//get from textarea format to JSON , because get from textarea not json format
+		var i =$.parseJSON($("#addapi-user").val());
+		
+		 $.ajax({
+			url:'http://localhost:8080/AnimalBook/api/user/add',
+			type:'post',
+			contentType:"Application/json",
+			data: JSON.stringify(i),
+			success:function(data){
+				alert(data.MESSAGE);
+			},
+			error:function(data){
+				alert("unsuccess");
+			}	
+		});
+	}
+	
+</script>
+        
+        <!--end api script ajax-->
+        
+        
     </body>
 </html>
