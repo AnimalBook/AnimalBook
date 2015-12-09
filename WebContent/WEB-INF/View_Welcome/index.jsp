@@ -143,7 +143,14 @@
 			contentType:"Application/json",
 			data: JSON.stringify(i),
 			success:function(data){
-				alert(data.MESSAGE);
+				
+				var successRuturn={
+					"Message":data.MESSAGE,
+					"Status":data.STATUS
+				};
+				
+				$("#Displayapi-user").text(JSON.stringify(successRuturn, null, 4)); 	
+
 			},
 			error:function(data){
 				alert("unsuccess");
