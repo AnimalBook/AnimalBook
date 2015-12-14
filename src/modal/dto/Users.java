@@ -15,7 +15,31 @@ public class Users {
 	@Id
 	private int user_id;
 	
-	private String username, password, first_name, last_name, dob, type, status;
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	private String username, password, first_name, last_name, dob, type, status,image,email,phone;
 	
 	@Column(name="gender", nullable=false) //this can omit if field name is the same column name
 	private char gender;

@@ -17,6 +17,8 @@
 	<context:component-scan base-package="controller" />
 	<mvc:annotation-driven />
 	
+	
+	
 	<mvc:resources mapping="resources/**" location="WEB-INF/resources/" />
 	
     <bean id="viewResolver"
@@ -28,5 +30,10 @@
             <value>.jsp</value>
         </property>
     </bean>
-
+    
+    <!-- use for get multipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="20971520" />
+	</bean>
+	
 </beans>

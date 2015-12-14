@@ -18,12 +18,12 @@ public class AddUser {
 	Connection con;
 
 	// get connection when create object
-	public AddUser() throws Exception {
+	/*public AddUser() throws Exception {
 		DBUtility utility = new DBUtility();
 		con = utility.getConnection();
 		System.out.println("Connecting to database...");
 	}
-
+*/
 	public boolean addUser(Users user) {
 		
 		// this object is contain all the detail regarding hibernate configuration file

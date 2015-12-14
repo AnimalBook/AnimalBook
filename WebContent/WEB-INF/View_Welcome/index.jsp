@@ -86,6 +86,18 @@
                     <textarea class="form-control" rows="13" id="addapi-user"></textarea>                     
                 </div>
             </div>
+            
+             <div class="row">
+                <div class="col-md-12">
+                
+                   <form  id="formUpload" enctype="multipart/form-data">
+  						Your image: <input type="file" name="pic" id="file"><br>
+  						<input type="submit" value="Submit">
+				  </form>  
+				                                        
+                </div>
+            </div>
+            
             <div class="row">
                 <div class="col-md-12">
                     <button type="button" class="btn btn-default" onclick="useradd_api()">Submit</button>                                          
@@ -113,7 +125,31 @@
         
         <!--api script ajax-->
         <script type="text/javascript">
-	$(document).ready(function(){		
+	$(document).ready(function(){
+		
+		$('#formUpload').submit(function (e) {
+			
+			//use for make our form upload by ajax
+			
+		    $.ajax({
+		    	
+		        type: 'post',
+		        url: 'http://localhost:8080/AnimalBook/api/user/upload',
+		        data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+		        contentType: false,       // The content type used when sending data to the server.
+		        cache: false,             // To unable request pages to be cached
+		        processData:false,        // To send DOMDocument or non processed data file it is set to false
+		        success: function (data) {
+		            alert(data.IMAGE);
+		        },
+		    	error:function(data){
+		    		alert("unsuccess");
+		    	}
+		    });
+		    e.preventDefault();
+		    
+		});
+		
 		
 				var defultJsonLoad={
 						"user_id":"102",
@@ -133,6 +169,7 @@
 				
 				
 	});
+	
 	function useradd_api(){
 		//get from textarea format to JSON , because get from textarea not json format
 		var i =$.parseJSON($("#addapi-user").val());
@@ -157,6 +194,7 @@
 			}	
 		});
 	}
+	
 	
 </script>
         
