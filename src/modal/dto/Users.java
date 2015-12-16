@@ -1,5 +1,7 @@
 package modal.dto;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,8 +41,27 @@ public class Users {
 		this.phone = phone;
 	}
 
-	private String username, password, first_name, last_name, dob, type, status,image,email,phone;
+	private String username, password, first_name, last_name, user_type, status,image,email,phone;
 	
+	public String getUser_type() {
+		return user_type;
+	}
+
+	public void setUser_type(String user_type) {
+		this.user_type = user_type;
+	}
+
+	private Date dob;
+	
+	
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
 	@Column(name="gender", nullable=false) //this can omit if field name is the same column name
 	private char gender;
 
@@ -84,21 +105,7 @@ public class Users {
 		this.last_name = last_name;
 	}
 
-	public String getDob() {
-		return dob;
-	}
-
-	public void setDob(String dob) {
-		this.dob = dob;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
+	
 
 	public String getStatus() {
 		return status;

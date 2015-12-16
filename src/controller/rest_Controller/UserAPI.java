@@ -25,10 +25,9 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/user")
 public class UserAPI {
 	
-		@RequestMapping("/add")
+		@RequestMapping(value="/add", method= RequestMethod.POST )
 		public ResponseEntity<Map<String,Object>> addUser(@RequestBody Users user){
-		
-			
+			System.out.println("cont");
 			Map<String, Object> map  = new HashMap<String, Object>();
 			try {
 				if(new AddUser().addUser(user)==true){
@@ -86,7 +85,7 @@ public class UserAPI {
 					
 					map.put("MESSAGE","UPLOAD IMAGE SUCCESS");
 					map.put("STATUS", HttpStatus.OK.value());
-					map.put("IMAGE", request.getContextPath() + "/images/" + filename);
+					map.put("IMAGE", request.getContextPath() + "/resources/images/" + filename);
 					
 					System.out.println(request.getContextPath());
 					

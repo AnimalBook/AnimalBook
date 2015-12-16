@@ -83,16 +83,15 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <textarea class="form-control" rows="13" id="addapi-user"></textarea>                     
+                    <textarea class="form-control" rows="13" id="textArea-user"></textarea>                     
                 </div>
             </div>
-            
+			<br>            
              <div class="row">
                 <div class="col-md-12">
                 
                    <form  id="formUpload" enctype="multipart/form-data">
   						Your image: <input type="file" name="pic" id="file"><br>
-  						<input type="submit" value="Submit">
 				  </form>  
 				                                        
                 </div>
@@ -103,6 +102,7 @@
                     <button type="button" class="btn btn-default" onclick="useradd_api()">Submit</button>                                          
                 </div>
             </div>
+            <br>
             <div class="row">
                 <div class="col-md-12">
                     <textarea class="form-control" rows="13" id="Displayapi-user"></textarea>                                          
@@ -126,11 +126,19 @@
         <!--api script ajax-->
         <script type="text/javascript">
 	$(document).ready(function(){
+		//upload
+		var image, message;
 		
+		//jquery upload file after select image
+		$('#file').change(function() { 
+			//auto submit form 
+		  	$("#formUpload").submit();
+		});
+		
+		//event when form submit
 		$('#formUpload').submit(function (e) {
-			
+		
 			//use for make our form upload by ajax
-			
 		    $.ajax({
 		    	
 		        type: 'post',
@@ -140,7 +148,13 @@
 		        cache: false,             // To unable request pages to be cached
 		        processData:false,        // To send DOMDocument or non processed data file it is set to false
 		        success: function (data) {
-		            alert(data.IMAGE);
+		            image=data.IMAGE;
+		            message=data.MESSAGE;
+		            
+		           	//upload file success add defultJsonLoad to textarea
+		        	//format var defultJsonLoad to json format for add to textarea that have id addapi-user
+		    		//do like this because if add this variable to textarea it just indicate only object 
+		    		$("#textArea-user").text(JSON.stringify(defultJsonLoad(image), null, 4));
 		        },
 		    	error:function(data){
 		    		alert("unsuccess");
@@ -149,35 +163,39 @@
 		    e.preventDefault();
 		    
 		});
-		
-		
-				var defultJsonLoad={
-						"user_id":"102",
-						"username":"test",
-						"password":"123",
-						"first_name":"sok",
-						"last_name":"lundy",
-						"gender":"M",
-						"dob":"2012-09-09",
-						"type":"test",
-						"status":"live"
-				};
-				//format var defultJsonLoad to json format for add to textarea that have id addapi-user
-				//do like this because if add this variable to textarea it just indicate only object 
-				$("#addapi-user").text(JSON.stringify(defultJsonLoad, null, 4));
-				//$("#Displayapi-user").text(JSON.stringify(i,null, 4));
-				
 				
 	});
 	
+	//defult json load
+	function defultJsonLoad(image){
+		var json={
+				"username":"test",
+				"password":"123", 
+				"user_type":" ",
+				"status":" ",
+				"email":" ",
+				"first_name":"sok",
+				"last_name":"lundy",
+				"gender":"M",
+				"dob":"2012-09-09",
+				"image":image,
+				"phone":"069 69 69 69"
+		};
+		return json;
+	}
+	
+	
+	
+	//insert user to controller
 	function useradd_api(){
 		//get from textarea format to JSON , because get from textarea not json format
-		var i =$.parseJSON($("#addapi-user").val());
+		var i =$.parseJSON($("#textArea-user").val());
 		
 		 $.ajax({
-			url:'http://localhost:8080/AnimalBook/api/user/add',
+			url:'${pageContext.request.contextPath }/api/user/add',
 			type:'post',
-			contentType:"Application/json",
+			//dataType: "json",
+			contentType:"Application/json; charset=utf-8",
 			data: JSON.stringify(i),
 			success:function(data){
 				
